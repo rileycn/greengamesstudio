@@ -13,6 +13,10 @@ public class player_jump : MonoBehaviour
     private float countdown;
     public float slow_timer = 1;
 
+    // audio
+    public AudioSource source;
+    public AudioClip clip;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -48,6 +52,8 @@ public class player_jump : MonoBehaviour
             cactus.speed = 5f;
             cactus_all.speed = 5f;
             countdown -= 1;
+            // play audio
+            source.PlayOneShot(clip);
         }
         if (collision.transform.tag == "Finish") {
             // cactus_begone.destroy = true;
