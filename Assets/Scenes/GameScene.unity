@@ -911,9 +911,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'fertilizer
-
-'
+  m_text: harvest
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1805,7 +1803,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5002307dfae144a75bb0c0cf4c390fb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectType: 2
+  objectType: 3
 --- !u!212 &402461996
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4773,9 +4771,9 @@ MonoBehaviour:
   droughtObj: {fileID: 653269472146207116, guid: 9e1e8b9d7b52d4f3bbdf90e48efdfafc, type: 3}
   field: {fileID: 251739694}
   splashUp: 0
-  plantSet: {fileID: 0}
-  maintainSet: {fileID: 0}
-  harvestSet: {fileID: 0}
+  plantSet: {fileID: 1662529323}
+  maintainSet: {fileID: 1743333169}
+  harvestSet: {fileID: 1308198193}
   month: 0
   season: 0
 --- !u!4 &1393899865
