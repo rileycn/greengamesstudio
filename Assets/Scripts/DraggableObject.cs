@@ -4,6 +4,16 @@ public class DraggableObject : MonoBehaviour
 {
     public static DraggableObject select;
 
+    public enum DraggableType
+    {
+        Seed,
+        Water,
+        Fert,
+        Harvest
+    };
+
+    public DraggableType objectType;
+
     private Vector3 ogPos;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -43,10 +53,48 @@ public class DraggableObject : MonoBehaviour
 
     public void OnDrop()
     {
-        if (PlantManager.hovers.Count >= 1)
+        if (PlantManager.hovers.Count <= 0)
         {
-            PlantManager plantCrop = PlantManager.hovers[0];
-            plantCrop.Plant();
+            return;
+        }
+        PlantManager plantCrop = PlantManager.hovers[0];
+        float oldDis = (transform.position - plantCrop.transform.position).magnitude;
+        for (int i = 1; i < PlantManager.hovers.Count; i++)
+        {
+            float newDis = (transform.position - PlantManager.hovers[i].transform.position).magnitude;
+            if (newDis < oldDis)
+            {
+                oldDis = newDis;
+                plantCrop = PlantManager.hovers[i];
+            }
+        }
+        if (objectType == DraggableType.Seed)
+        {
+            if (GameManager.main.seed >= 1f) {
+                plantCrop.Plant();
+                GameManager.main.seed--;
+                GameManager.main.UpdateMeterVisuals();
+            }
+        } else if (objectType == DraggableType.Water)
+        {
+            if (GameManager.main.water >= 1f)
+            {
+                plantCrop.Water();
+                GameManager.main.water--;
+                GameManager.main.UpdateMeterVisuals();
+            }
+        } else if (objectType == DraggableType.Fert)
+        {
+            if (GameManager.main.fert >= 1f)
+            {
+                plantCrop.Fertilize();
+                GameManager.main.fert--;
+                GameManager.main.UpdateMeterVisuals();
+            }
+        }
+        else if (objectType == DraggableType.Harvest)
+        {
+            plantCrop.Harvest();
         }
     }
 }
