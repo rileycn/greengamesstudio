@@ -15,9 +15,8 @@ public class player_jump : MonoBehaviour
     public float slow_timer = 1;
 
     // audio
-    public AudioSource source;
-    public AudioClip clip1;
-    public AudioClip clip2;
+    public random_sound audio;
+    //
 
     public GameObject gameObj;
 
@@ -58,14 +57,9 @@ public class player_jump : MonoBehaviour
             cactus.speed = 5f;
             cactus_all.speed = 5f;
             countdown -= 1;
-            // play audio
-            int random = Random.Range(0, 2);
-            if (random == 0){
-                source.PlayOneShot(clip1);
-            }
-            else {
-                source.PlayOneShot(clip2);
-            }
+            //splat sound
+            audio.PlayRandom();
+            //
             StartCoroutine(HitAnimation());
         }
         if (collision.transform.tag == "Finish") {
