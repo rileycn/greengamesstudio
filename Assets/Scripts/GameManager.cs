@@ -147,7 +147,7 @@ public class GameManager : MonoBehaviour
                     {
                         Instantiate(windObj);
                         //rain warning?
-                        Warning(0);
+                        //Warning(0);
                     }
                     if (Time.time - startTime > ((1 / 3f) * maxTime) - 30f)
                     {
