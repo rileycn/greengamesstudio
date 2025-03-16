@@ -59,7 +59,6 @@ public class player_jump : MonoBehaviour
             cactus_all.speed = 5f;
             countdown -= 1;
             // play audio
-<<<<<<< HEAD
             int random = Random.Range(0, 2);
             if (random == 0){
                 source.PlayOneShot(clip1);
@@ -67,10 +66,7 @@ public class player_jump : MonoBehaviour
             else {
                 source.PlayOneShot(clip2);
             }
-=======
-            source.PlayOneShot(clip);
             StartCoroutine(HitAnimation());
->>>>>>> e581f454886d832ee340e962808e33b8e30cf68d
         }
         if (collision.transform.tag == "Finish") {
             // cactus_begone.destroy = true;

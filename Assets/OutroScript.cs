@@ -1,26 +1,23 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class OutroScript : MonoBehaviour
 {
     void Start()
     {
-        Restart();
+        //Restart();
         
     }
 
-    void Restart()
+    public void Restart()
     {
-        /*
-        ShopManagerScript shopManager = FindObjectOfType<ShopManagerScript>();
 
-        if (shopManager == null) {
-            Debug.LogError("ShopManagerScript not found in scene");
-            return;
-        }
+        GameInfo.year = 1;
+        GameInfo.fert = 0;
+        GameInfo.water = 0;
+        GameInfo.seed = 0;
+        GameInfo.cash = 0;
 
-        shopManager.year = 0;
-        shopManager.Quantity = 0
-        */
-        
+        SceneManager.LoadScene("MainMenu");
     }
 }
