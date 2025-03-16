@@ -586,10 +586,17 @@ public class GameManager : MonoBehaviour
 
     public void ShopTime()
     {
-        GameInfo.seed = (int) seed;
-        GameInfo.water = (int) water;
-        GameInfo.fert = (int) fert;
-        SceneManager.LoadScene("shop");
+        GameInfo.seed = (int)seed;
+        GameInfo.water = (int)water;
+        GameInfo.fert = (int)fert;
+        if (year == 3)
+        {
+            SceneManager.LoadScene("outro screen");
+        }
+        else
+        {
+            SceneManager.LoadScene("shop");
+        }
     }
 }
 
