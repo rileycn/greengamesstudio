@@ -10,7 +10,8 @@ public class PlantManager : MonoBehaviour
     public int phase = 0;
 
     public GameObject stage1obj;
-    public GameObject harvestobj;
+    public GameObject stage2obj;
+    public GameObject stage3obj;
 
     public float health = 30f;
     public float maxhealth = 30f;
@@ -25,10 +26,13 @@ public class PlantManager : MonoBehaviour
     public WindEffectManager wem;
     public Transform healthBar;
 
+    public Color ogcolor;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        ogcolor = GetComponent<SpriteRenderer>().color;
+        //Plant();
     }
 
     // Update is called once per frame
@@ -81,7 +85,7 @@ public class PlantManager : MonoBehaviour
             overs.Remove(collision);
             if (overs.Count <= 0)
             {
-                GetComponent<SpriteRenderer>().color = Color.white;
+                GetComponent<SpriteRenderer>().color = ogcolor;
                 hovers.Remove(this);
             }
         }
@@ -90,10 +94,31 @@ public class PlantManager : MonoBehaviour
     public void Plant()
     {
         stage1obj.SetActive(true);
+        stage2obj.SetActive(false);
+        stage3obj.SetActive(false);
         health = maxhealth;
         GameManager.main.crop++;
         GameManager.main.UpdateMeterVisuals();
         phase = 1;
+    }
+
+    public void NextPhase()
+    {
+        stage1obj.SetActive(false);
+        stage2obj.SetActive(false);
+        stage3obj.SetActive(false);
+        switch (GameManager.main.season)
+        {
+            case GameManager.SeasonValue.Planting:
+                stage1obj.SetActive(true);
+                break;
+            case GameManager.SeasonValue.Rainy:
+                stage2obj.SetActive(true);
+                break;
+            case GameManager.SeasonValue.Harvest:
+                stage3obj.SetActive(true);
+                break;
+        }
     }
 
     public void Water()
@@ -112,7 +137,8 @@ public class PlantManager : MonoBehaviour
     {
         phase = 2;
         stage1obj.SetActive(false);
-        harvestobj.SetActive(true);
+        stage2obj.SetActive(false);
+        stage3obj.SetActive(false);
         health = maxhealth;
         fertilized = false;
         UpdateVisualFert();
@@ -123,6 +149,8 @@ public class PlantManager : MonoBehaviour
         fertilized = false;
         phase = 0;
         stage1obj.SetActive(false);
+        stage2obj.SetActive(false);
+        stage3obj.SetActive(false);
         GameManager.main.crop--;
         GameManager.main.UpdateMeterVisuals();
         UpdateVisualFert();
