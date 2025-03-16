@@ -18,9 +18,9 @@ public class ShopManagerScript : MonoBehaviour // placed by default
     public int[,] shopItems = new int[4,4];
     public float coins;
     public int Quantity;
-    public TMP_Text CoinsTXT; // learned from youtube video
-    public TMP_Text QuantityTXT; // learned from youtube video
-    public int year = 1; // learned from youtube video
+    public TMP_Text CoinsTXT;
+    public TMP_Text QuantityTXT; 
+    public int year = 1;
     
 
     
