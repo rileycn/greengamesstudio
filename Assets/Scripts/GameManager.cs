@@ -546,8 +546,8 @@ public class GameManager : MonoBehaviour
         {
             yield return new WaitForSeconds(0.5f);
         }
-        cashEarnedText.text = "Total Earnings: " + (20 * cropYield) + "sol";
-        GameInfo.cash += (20 * cropYield);
+        cashEarnedText.text = "Total Earnings: " + (20f / year * cropYield) + "sol";
+        GameInfo.cash += (20f / year * cropYield);
         yield return Punch(cashEarnedText.transform);
         yield return new WaitForSeconds(1f);
         if (year == 1) {

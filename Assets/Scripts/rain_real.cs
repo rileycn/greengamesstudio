@@ -32,7 +32,7 @@ public class rain_real : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision) {
         if (collision.transform.tag == "Player") {
             //droplet sound
-            audio.PlayRandom();
+            //audio.PlayRandom();
             //
             spawner.rain_collected += 1;
         }
