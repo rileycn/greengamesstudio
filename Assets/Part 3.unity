@@ -150,6 +150,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameText: {fileID: 1296233959}
   dialogueText: {fileID: 2142498442}
+  dialogueID: 0
+  destroyMe: {fileID: 0}
 --- !u!4 &630137115
 Transform:
   m_ObjectHideFlags: 0
@@ -158,12 +160,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 630137113}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 324.41925, y: 205.5878, z: 0.07679362}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -635.58075, y: -334.4122, z: 0.07679362}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1939538801}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &822182712
 GameObject:
@@ -1215,6 +1217,7 @@ RectTransform:
   m_Children:
   - {fileID: 1350999135}
   - {fileID: 1323633682}
+  - {fileID: 630137115}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1374,7 +1377,6 @@ CanvasRenderer:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 630137115}
   - {fileID: 822182716}
   - {fileID: 1939538801}
   - {fileID: 1063227206}
