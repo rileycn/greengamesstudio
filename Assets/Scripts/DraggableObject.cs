@@ -15,6 +15,7 @@ public class DraggableObject : MonoBehaviour
     public DraggableType objectType;
 
     private Vector3 ogPos;
+    public GameObject harvestRing;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -34,10 +35,18 @@ public class DraggableObject : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (select == null)
+        if (select == null && !GameManager.main.inWarning)
         {
             select = this;
             ogPos = transform.position;
+            if (objectType == DraggableType.Harvest)
+            {
+                GetComponent<CircleCollider2D>().radius = 1f;
+                harvestRing.SetActive(true);
+            } else
+            {
+                GetComponent<CircleCollider2D>().radius = 0.01f;
+            }
         }
     }
 
@@ -48,6 +57,10 @@ public class DraggableObject : MonoBehaviour
             OnDrop();
             select = null;
             transform.position = ogPos;
+            if (objectType == DraggableType.Harvest)
+            {
+                harvestRing.SetActive(false);
+            }
         }
     }
 
@@ -55,6 +68,7 @@ public class DraggableObject : MonoBehaviour
     {
         if (PlantManager.hovers.Count <= 0)
         {
+            GetComponent<CircleCollider2D>().radius = 0.5f;
             return;
         }
         PlantManager plantCrop = PlantManager.hovers[0];
@@ -94,7 +108,12 @@ public class DraggableObject : MonoBehaviour
         }
         else if (objectType == DraggableType.Harvest)
         {
-            plantCrop.Harvest();
+            for (int i = 0; i < PlantManager.hovers.Count; i++)
+            {
+                PlantManager.hovers[i].Harvest();
+            }
+            harvestRing.SetActive(false);
         }
+        GetComponent<CircleCollider2D>().radius = 0.5f;
     }
 }

@@ -10,9 +10,9 @@ public class FieldManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        for (int x = -4; x <= 4; x++)
+        for (int x = -5; x <= 5; x++)
         {
-            for (int y = -2; y <= 2; y++)
+            for (int y = -1; y <= 1; y++)
             {
                 GameObject newPlant = Instantiate(plantObj);
                 newPlant.transform.parent = transform;
@@ -29,6 +29,7 @@ public class FieldManager : MonoBehaviour
             if (pm.phase >= 1) {
                 pm.health = pm.maxhealth;
                 pm.continueOn = Time.time + 5f + Random.value * 5f;
+                pm.NextPhase();
             }
         }
     }

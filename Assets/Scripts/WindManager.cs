@@ -6,9 +6,9 @@ public class WindManager : MonoBehaviour
 {
     private List<PlantManager> under = new();
 
-    private float startTime;
+    public SpriteRenderer sr;
 
-    public TMP_Text textColor;
+    private float startTime;
 
     private float baseopactiy = 0.25f;
 
@@ -39,20 +39,15 @@ public class WindManager : MonoBehaviour
         if (Time.time - startTime < 1f)
         {
             float alpha = Time.time - startTime;
-            SpriteRenderer sr = GetComponent<SpriteRenderer>();
             sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, alpha * baseopactiy);
-            textColor.color = new Color(textColor.color.r, textColor.color.g, textColor.color.b, alpha * baseopactiy);
         } else if (Time.time - startTime < 14f)
         {
-            SpriteRenderer sr = GetComponent<SpriteRenderer>();
             sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, baseopactiy);
         }
         else if (Time.time - startTime < 15f)
         {
             float alpha = 15f - (Time.time - startTime);
-            SpriteRenderer sr = GetComponent<SpriteRenderer>();
             sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, alpha * baseopactiy);
-            textColor.color = new Color(textColor.color.r, textColor.color.g, textColor.color.b, alpha * baseopactiy);
         } else
         {
             Destroy(gameObject);

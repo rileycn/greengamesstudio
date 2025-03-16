@@ -8,6 +8,8 @@ public class rain_spawner : MonoBehaviour
     public float min_left;
     public float max_right;
     public float time_to_spawn_randomizer;
+
+    public int rain_collected = 0;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -25,7 +27,7 @@ public class rain_spawner : MonoBehaviour
         if(spawn_countdown <= 0)
         {
             spawn_countdown = Random.Range(time_to_spawn - time_to_spawn_randomizer, time_to_spawn + time_to_spawn_randomizer);
-            Instantiate(rain, transform.position, transform.rotation);
+            GameObject newRain = Instantiate(rain, transform.position, transform.rotation, transform.parent);
         }
     }
 }

@@ -5,6 +5,9 @@ public class CloudManager : MonoBehaviour
 {
     private List<PlantManager> under = new();
 
+    public Sprite sprite1;
+    public Sprite sprite2;
+
     private float speed = 1f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -36,6 +39,7 @@ public class CloudManager : MonoBehaviour
                 
             }
         }
+        GetComponent<SpriteRenderer>().sprite = (Time.time % 1f > 0.5f) ? sprite1 : sprite2;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
