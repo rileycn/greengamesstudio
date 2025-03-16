@@ -2,6 +2,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class GameManager : MonoBehaviour
     public float water;
     public float fert;
 
+    public float cropYield;
     public float crop;
     public float maxcrop;
 
@@ -86,12 +88,22 @@ public class GameManager : MonoBehaviour
     public SeasonValue season;
 
     public GameObject rainstormMinigame;
+    public GameObject windstormMinigame;
+    public GameObject droughtMinigame;
 
     public Transform gamePutIn;
     public GameObject warningScreen;
     public TMP_Text warningText;
 
     public bool inWarning = false;
+
+    private float season1val = 1f / 3f;
+    private float season2val = 1f / 3f + 1f/4f;
+    private float season3val = 1f / 3f + 1f / 4f + 1/4f;
+
+    private int firstDroughtIndex = 0;
+    private int firstWindstormIndex = 0;
+    private int firstRainstormIndex = 0;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -102,11 +114,13 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        seed = maxValue / 2f;
-        water = maxValue / 2f;
-        fert = maxValue / 2f;
+        seed = GameInfo.seed;
+        water = GameInfo.water;
+        fert = GameInfo.fert;
         maxcrop = seed;
+        year = GameInfo.year;
         crop = 0;
+        cropYield = 0;
         yearText.text = "Year " + year;
         nextDisaster = Time.time + 10f + Random.value * 5f;
         UpdateMeterVisuals();
@@ -139,17 +153,39 @@ public class GameManager : MonoBehaviour
                     } else if (year == 2)
                     {
                         Instantiate(windObj);
+                        firstWindstormIndex++;
                         if (Random.value < 0.5f)
                         {
                             Instantiate(cloudObj);
                         }
+                        if (firstWindstormIndex == 2)
+                        {
+                            Warning(1); //windstorm warning
+                        }
                     } else if (year == 3)
                     {
                         Instantiate(windObj);
+                        if (Random.value < 0.5f)
+                        {
+                            Instantiate(cloudObj);
+                        }
+                        firstWindstormIndex++;
+                        if (firstWindstormIndex % 3 == 0)
+                        {
+                            if (Random.value < 0.5f)
+                            {
+                                Warning(1);
+                            } else
+                            {
+                                Warning(0);
+                            }
+                        }
+                        //Instantiate(droughtObj);
+                        //Instantiate(cloudObj);
                         //rain warning?
-                        //Warning(0);
+                        //Warning(2);
                     }
-                    if (Time.time - startTime > ((1 / 3f) * maxTime) - 30f)
+                    if (Time.time - startTime > (season1val * maxTime) - 30f)
                     {
                         nextDisaster = Time.time + 9999f;
                     } else {
@@ -171,6 +207,7 @@ public class GameManager : MonoBehaviour
                     }
                     else if (year == 3)
                     {
+                        firstDroughtIndex++;
                         if (Random.value < 0.5f)
                         {
                             Instantiate(cloudObj);
@@ -179,8 +216,18 @@ public class GameManager : MonoBehaviour
                         {
                             Instantiate(droughtObj);
                         }
+                        if (firstDroughtIndex == 4)
+                        {
+                            Warning(2);
+                        } else if (firstDroughtIndex >= 5)
+                        {
+                            if (Random.value < 0.25f)
+                            {
+                                Warning(2);
+                            }
+                        }
                     }
-                    if (Time.time - startTime > ((2 / 3f) * maxTime) - 15f)
+                    if (Time.time - startTime > (season2val * maxTime) - 15f)
                     {
                         nextDisaster = Time.time + 9999f;
                     }
@@ -197,13 +244,15 @@ public class GameManager : MonoBehaviour
                     else if (year == 2)
                     {
                         Instantiate(droughtObj);
-                        if (Random.value < 0.5f)
-                        {
-                            Instantiate(droughtObj);
-                        }
+                        firstRainstormIndex++;
                         if (Random.value < 0.25f)
                         {
                             Instantiate(cloudObj);
+                        }
+                        if (firstRainstormIndex == 2)
+                        {
+                            Instantiate(cloudObj);
+                            Warning(0);
                         }
                     }
                     else if (year == 3)
@@ -211,12 +260,15 @@ public class GameManager : MonoBehaviour
                         Instantiate(droughtObj);
                         if (Random.value < 0.5f)
                         {
-                            Instantiate(droughtObj);
-                        }
-                        if (Random.value < 0.5f)
-                        {
                             Instantiate(cloudObj);
+                        } else
+                        {
+                            if (Random.value < 0.75f && !splashUp)
+                            {
+                                Warning(2);
+                            }
                         }
+                        
                     }
                     nextDisaster = Time.time + Random.value * (5f) + (15f / year);
                     break;
@@ -234,19 +286,19 @@ public class GameManager : MonoBehaviour
         switch (season)
         {
             case SeasonValue.Planting:
-                if (alpha >= 1/3f)
+                if (alpha >= season1val)
                 {
                     NextSeason();
                 }
                 break;
             case SeasonValue.Rainy:
-                if (alpha >= 2 / 3f)
+                if (alpha >= season2val)
                 {
                     NextSeason();
                 }
                 break;
             case SeasonValue.Harvest:
-                if (alpha >= 5 / 6f)
+                if (alpha >= season3val)
                 {
                     NextSeason();
                 }
@@ -255,7 +307,7 @@ public class GameManager : MonoBehaviour
                 //shop time :)
                 break;
         }
-        dialObject.rotation = Quaternion.Euler(new Vector3(0f, 0f, 360f * alpha));
+        dialObject.rotation = Quaternion.Euler(new Vector3(0f, 0f, 360f * alpha + 145f));
     }
 
     private void NextSeason()
@@ -419,13 +471,14 @@ public class GameManager : MonoBehaviour
         }
         endGameSplash.color = new Color(endGameSplash.color.r, endGameSplash.color.g, endGameSplash.color.b, 1);
         yield return new WaitForSeconds(1f);
-        cropsProducedText.text = "Crops Produced: " + crop + "/" + maxcrop;
+        cropsProducedText.text = "Crops Produced: " + cropYield + "/" + maxcrop;
         yield return Punch(cropsProducedText.transform);
         yield return new WaitForSeconds(1f);
-        cashPerCropText.text = "Cash Per Unit: " + 5 + "sol";
+        cashPerCropText.text = "Cash Per Unit: " + 20 + "sol";
         yield return Punch(cashPerCropText.transform);
         yield return new WaitForSeconds(1f);
-        cashEarnedText.text = "Total Earnings: " + (5 * crop) + "sol";
+        cashEarnedText.text = "Total Earnings: " + (20 * cropYield) + "sol";
+        GameInfo.cash += (20 * cropYield);
         yield return Punch(cashEarnedText.transform);
         yield return new WaitForSeconds(1f);
         yield return Punch(endNextButton.transform);
@@ -458,6 +511,13 @@ public class GameManager : MonoBehaviour
         if (type == 0)
         {
             warningText.text = "Weather Alert: Rainstorm!";
+        } else if (type == 1)
+        {
+            warningText.text = "Weather Alert: Windstorm!";
+        }
+        else if (type == 2)
+        {
+            warningText.text = "Weather Alert: Severe Drought!";
         }
         warningScreen.SetActive(true);
         for (int i = 0; i < 3; i++)
@@ -470,6 +530,14 @@ public class GameManager : MonoBehaviour
         if (type == 0)
         {
             GameObject newGame = Instantiate(rainstormMinigame, gamePutIn);
+        } else if (type == 1)
+        {
+
+            GameObject newGame = Instantiate(windstormMinigame, gamePutIn);
+        }
+        else if (type == 2)
+        {
+            GameObject newGame = Instantiate(droughtMinigame, gamePutIn);
         }
     }
 
@@ -478,5 +546,21 @@ public class GameManager : MonoBehaviour
         warningScreen.SetActive(false);
         inWarning = false;
     }
-    
+
+    public void ShopTime()
+    {
+        GameInfo.seed = (int) seed;
+        GameInfo.water = (int) water;
+        GameInfo.fert = (int) fert;
+        SceneManager.LoadScene("shop");
+    }
+}
+
+public class GameInfo
+{
+    public static int year = 1;
+    public static int seed = 25;
+    public static int water = 25;
+    public static int fert = 25;
+    public static float cash = 0f;
 }

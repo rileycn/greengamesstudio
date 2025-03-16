@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class player_jump : MonoBehaviour
@@ -16,6 +17,10 @@ public class player_jump : MonoBehaviour
     // audio
     public AudioSource source;
     public AudioClip clip;
+
+    public GameObject gameObj;
+
+    public SpriteRenderer playerSprite;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -54,10 +59,22 @@ public class player_jump : MonoBehaviour
             countdown -= 1;
             // play audio
             source.PlayOneShot(clip);
+            StartCoroutine(HitAnimation());
         }
         if (collision.transform.tag == "Finish") {
             // cactus_begone.destroy = true;
+            GameManager.main.ExitWarning();
+            Destroy(gameObj);
+        }
+    }
 
+    private IEnumerator HitAnimation()
+    {
+        for (int i = 0; i < 5; i++) {
+            playerSprite.gameObject.SetActive(false);
+            yield return new WaitForSeconds(0.1f);
+            playerSprite.gameObject.SetActive(true);
+            yield return new WaitForSeconds(0.2f);
         }
     }
 

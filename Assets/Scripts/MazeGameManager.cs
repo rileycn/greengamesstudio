@@ -43,7 +43,7 @@ public class MazeGameManager : MonoBehaviour
             gameObjLoc.GetComponent<Rigidbody2D>().linearVelocity = new Vector2();
             return;
         }
-        gameObjLoc.GetComponent<Rigidbody2D>().linearVelocity = -new Vector2(xinput, yinput) * Time.fixedDeltaTime * 200f;
+        gameObjLoc.GetComponent<Rigidbody2D>().linearVelocity = -new Vector2(xinput, yinput) * 5f;
     }
 
     public void GenerateMaze()

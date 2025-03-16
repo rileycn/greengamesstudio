@@ -11,6 +11,7 @@ using UnityEngine; // learned from youtube video
 using UnityEngine.EventSystems; // learned from youtube video
 using UnityEngine.UI; // learned from youtube video
 using TMPro; // learned from youtube video
+using UnityEngine.SceneManagement;
 
 
 public class ShopManagerScript : MonoBehaviour // placed by default
@@ -26,12 +27,15 @@ public class ShopManagerScript : MonoBehaviour // placed by default
     
     void Start() // learned from youtube video
     {
+        coins = GameInfo.cash;
+        year = GameInfo.year;
+
         CoinsTXT.text = "CURRENCY (SOL): S/ " + coins.ToString() + ".00"; // learned from youtube video
 
         // id
-        shopItems[1,1] = 1;
-        shopItems[1,2] = 2;
-        shopItems[1,3] = 3;
+        shopItems[1,1] = 1; //seed
+        shopItems[1,2] = 2; //fert
+        shopItems[1,3] = 3; //water
 
         // Price
         switch (year) {
@@ -58,9 +62,9 @@ public class ShopManagerScript : MonoBehaviour // placed by default
         }
 
         // Quantity
-        shopItems[3,1] = 0;
-        shopItems[3,2] = 0;
-        shopItems[3,3] = 0;
+        shopItems[3,1] = GameInfo.seed;
+        shopItems[3,2] = GameInfo.fert;
+        shopItems[3,3] = GameInfo.water;
     
 
     }
@@ -73,5 +77,15 @@ public class ShopManagerScript : MonoBehaviour // placed by default
             shopItems[3,ButtonRef.GetComponent<ButtonInfo>().ItemID]++; // learned GetComponent from youtube video
             CoinsTXT.text = "CURRENCY (SOL): S/ " + coins.ToString() + ".00";
         }
+    }
+
+    public void EndShop()
+    {
+        GameInfo.year++;
+        GameInfo.seed = shopItems[3, 1];
+        GameInfo.fert = shopItems[3, 2];
+        GameInfo.water = shopItems[3, 3];
+        GameInfo.cash = coins;
+        SceneManager.LoadScene("GameScene");
     }
 }
