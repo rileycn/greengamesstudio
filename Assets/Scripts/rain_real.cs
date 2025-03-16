@@ -14,7 +14,7 @@ public class rain_real : MonoBehaviour
     {
         // stop spawning
         if (spawner.rain_collected >= rain_needed) {
-            Object.Destroy(this.gameObject);
+            //Object.Destroy(this.gameObject);
         }
     }
 
@@ -34,6 +34,6 @@ public class rain_real : MonoBehaviour
             GameManager.main.ExitWarning();
             Destroy(gameLoc);
         }
-        Object.Destroy(this.gameObject);
+        Destroy(gameObject);
     }
 }
