@@ -15,6 +15,11 @@ public class WindEffectManager : MonoBehaviour
 
     public List<SpriteRenderer> usedSprites = new();
 
+    // audio
+    public random_sound audio;
+    public random_sound audio2;
+    //
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -25,6 +30,9 @@ public class WindEffectManager : MonoBehaviour
     {
         int timeLeft = Mathf.CeilToInt(clickTime - (Time.time - startTime));
         if (timeLeft <= -1) {
+            // splat sound
+            audio2.PlayRandom();
+            //
             pm.Die();
             gameObject.SetActive(false);
         } else {
@@ -43,6 +51,10 @@ public class WindEffectManager : MonoBehaviour
 
     private void OnMouseDown()
     {
+        //button sound
+        audio.PlayRandom();
+        //
+
         gameObject.SetActive(false);
     }
 

@@ -3,6 +3,7 @@ using UnityEngine;
 public class DraggableObject : MonoBehaviour
 {
     public static DraggableObject select;
+    public random_sound audio;
 
     public enum DraggableType
     {
@@ -86,6 +87,9 @@ public class DraggableObject : MonoBehaviour
         {
             if (GameManager.main.seed >= 1f) {
                 plantCrop.Plant();
+                //plant sound
+                audio.PlayRandom();
+                //
                 GameManager.main.seed--;
                 GameManager.main.UpdateMeterVisuals();
             }
@@ -94,6 +98,9 @@ public class DraggableObject : MonoBehaviour
             if (GameManager.main.water >= 1f)
             {
                 plantCrop.Water();
+                //plant sound
+                audio.PlayRandom();
+                //
                 GameManager.main.water--;
                 GameManager.main.UpdateMeterVisuals();
             }
@@ -102,6 +109,9 @@ public class DraggableObject : MonoBehaviour
             if (GameManager.main.fert >= 1f)
             {
                 plantCrop.Fertilize();
+                //plant sound
+                audio.PlayRandom();
+                //
                 GameManager.main.fert--;
                 GameManager.main.UpdateMeterVisuals();
             }
