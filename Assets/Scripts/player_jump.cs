@@ -15,7 +15,8 @@ public class player_jump : MonoBehaviour
 
     // audio
     public AudioSource source;
-    public AudioClip clip;
+    public AudioClip clip1;
+    public AudioClip clip2;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -53,7 +54,13 @@ public class player_jump : MonoBehaviour
             cactus_all.speed = 5f;
             countdown -= 1;
             // play audio
-            source.PlayOneShot(clip);
+            int random = Random.Range(0, 2);
+            if (random == 0){
+                source.PlayOneShot(clip1);
+            }
+            else {
+                source.PlayOneShot(clip2);
+            }
         }
         if (collision.transform.tag == "Finish") {
             // cactus_begone.destroy = true;
