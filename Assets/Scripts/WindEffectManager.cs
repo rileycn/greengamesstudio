@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class WindEffectManager : MonoBehaviour
 {
-    private Color ogcolor = Color.gray;
+    private Color ogcolor = new Color(0x9B / 256f, 0xAB / 256f, 0xE0 / 256f);
     public float startTime;
 
     public TMP_Text clickText;
@@ -21,7 +21,7 @@ public class WindEffectManager : MonoBehaviour
     //
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
     }
 

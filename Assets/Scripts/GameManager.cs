@@ -31,6 +31,8 @@ public class GameManager : MonoBehaviour
 
     public Image seasonSplash;
     public TMP_Text splashText;
+    public TMP_Text splashText2;
+    public Image vinObj;
 
     public GameObject cloudObj;
     public GameObject windObj;
@@ -422,22 +424,34 @@ public class GameManager : MonoBehaviour
     public void SplashScreen()
     {
         string seasonName = "Unknown";
+        string subtitle = "Unknown";
+        Color seasonColor = new Color();
         switch (season)
         {
             case SeasonValue.Planting:
                 seasonName = "Planting";
+                subtitle = "Plant your seeds!";
+                seasonColor = new Color(0x8d / 256f, 0x8f / 256f, 0x4b / 256f);
                 break;
             case SeasonValue.Rainy:
                 seasonName = "Rainy";
+                subtitle = "Maintain your plants!";
+                seasonColor = new Color(0x43 / 256f, 0x89 / 256f, 0xb2 / 256f);
                 break;
             case SeasonValue.Harvest:
                 seasonName = "Harvest";
+                subtitle = "Harvest your crops!";
+                seasonColor = new Color(0xef / 256f, 0xb2 / 256f, 0x49 / 256f);
                 break;
             case SeasonValue.Dry:
                 seasonName = "Dry";
+                subtitle = "The year is over!";
+                seasonColor = new Color(0xee / 256f, 0x70 / 256f, 0x2d / 256f);
                 break;
         }
         splashText.text = seasonName + " Season";
+        splashText2.text = subtitle;
+        vinObj.color = seasonColor;
         StartCoroutine(SplashAnimation());
     }
 
@@ -446,6 +460,7 @@ public class GameManager : MonoBehaviour
         splashUp = true;
         seasonSplash.color = new Color(seasonSplash.color.r, seasonSplash.color.g, seasonSplash.color.b, 0);
         splashText.color = new Color(splashText.color.r, splashText.color.g, splashText.color.b, 0);
+        splashText2.color = new Color(splashText2.color.r, splashText2.color.g, splashText2.color.b, 0);
         seasonSplash.gameObject.SetActive(true);
         float startTime = Time.time;
         purduepete.SetActive(false);
@@ -468,6 +483,7 @@ public class GameManager : MonoBehaviour
             }
             seasonSplash.color = new Color(seasonSplash.color.r, seasonSplash.color.g, seasonSplash.color.b, alpha);
             splashText.color = new Color(splashText.color.r, splashText.color.g, splashText.color.b, alpha);
+            splashText2.color = new Color(splashText2.color.r, splashText2.color.g, splashText2.color.b, alpha);
             yield return null;
         }
         seasonSplash.gameObject.SetActive(false);
