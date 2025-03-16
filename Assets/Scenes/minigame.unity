@@ -718,7 +718,8 @@ MonoBehaviour:
     m_Bits: 8
   slow_timer: 1
   source: {fileID: 1940308690}
-  clip: {fileID: 8300000, guid: 3645a1db7a3f4e548b668259f2093f12, type: 3}
+  clip1: {fileID: 8300000, guid: bf52f2c500d2f2940b7ced7a7fbf4869, type: 3}
+  clip2: {fileID: 8300000, guid: 896d50d761635cc498e2165876dc4bf2, type: 3}
 --- !u!82 &1940308690
 AudioSource:
   m_ObjectHideFlags: 0
