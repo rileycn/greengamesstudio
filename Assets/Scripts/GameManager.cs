@@ -102,6 +102,8 @@ public class GameManager : MonoBehaviour
     public GameObject warningScreen;
     public TMP_Text warningText;
 
+    public GameObject purduepete;
+
     public bool inWarning = false;
 
     private float season1val = 1f / 3f;
@@ -173,6 +175,7 @@ public class GameManager : MonoBehaviour
                 case SeasonValue.Planting:
                     if (year == 1) {
                         Instantiate(windObj);
+                        //Warning(2);
                     } else if (year == 2)
                     {
                         Instantiate(windObj);
@@ -445,6 +448,7 @@ public class GameManager : MonoBehaviour
         splashText.color = new Color(splashText.color.r, splashText.color.g, splashText.color.b, 0);
         seasonSplash.gameObject.SetActive(true);
         float startTime = Time.time;
+        purduepete.SetActive(false);
         while (Time.time - startTime < 4f)
         {
             float alpha = 0f;
@@ -454,6 +458,10 @@ public class GameManager : MonoBehaviour
             } else if (Time.time - startTime < 3.5f)
             {
                 alpha = 1f;
+                if (year == 2 && season == SeasonValue.Harvest)
+                {
+                    purduepete.SetActive(true);
+                }
             } else
             {
                 alpha = 2f * (4f - (Time.time - startTime));
@@ -475,6 +483,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator EndGameSequence()
     {
+        yield return new WaitForSeconds(3f);
         cropsProducedText.gameObject.SetActive(false);
         cashPerCropText.gameObject.SetActive(false);
         cashEarnedText.gameObject.SetActive(false);
@@ -498,8 +507,29 @@ public class GameManager : MonoBehaviour
         yield return Punch(cropsProducedText.transform);
         yield return new WaitForSeconds(1f);
         cashPerCropText.text = "Cash Per Unit: " + 20 + "sol";
-        yield return Punch(cashPerCropText.transform);
         yield return new WaitForSeconds(1f);
+        cashPerCropText.color = Color.white;
+        yield return Punch(cashPerCropText.transform);
+        yield return new WaitForSeconds(0.5f);
+        if (year == 2 || year == 3)
+        {
+            int initValue = 20;
+            int dropValue = 20 / year;
+            float dropTime = Time.time;
+            cashPerCropText.color = Color.red;
+            while (Time.time - dropTime < 0.5f)
+            {
+                float alpha = (Time.time - dropTime) * 2f;
+                int newVal = (int) ((dropValue - initValue) * alpha) + initValue;
+                cashPerCropText.text = "Cash Per Unit: " + newVal + "sol";
+                yield return null;
+            }
+            cashPerCropText.text = "Cash Per Unit: " + dropValue + "sol";
+            yield return new WaitForSeconds(1f);
+        } else
+        {
+            yield return new WaitForSeconds(0.5f);
+        }
         cashEarnedText.text = "Total Earnings: " + (20 * cropYield) + "sol";
         GameInfo.cash += (20 * cropYield);
         yield return Punch(cashEarnedText.transform);
