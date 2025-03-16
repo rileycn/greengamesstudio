@@ -2,7 +2,11 @@ using UnityEngine;
 
 public class rain_player : MonoBehaviour
 {
-    public float speed = 10f;
+    public float speed = 5f;
+
+    private float xinput;
+    private float yinput;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -10,15 +14,14 @@ public class rain_player : MonoBehaviour
     }
 
     // Update is called once per frame
+    void FixedUpdate()
+    {
+        GetComponent<Rigidbody2D>().linearVelocityX = xinput * speed;
+    }
+
     void Update()
     {
-        if(Input.GetKey(KeyCode.A))
-        {
-            transform.position += transform.right * -speed * Time.deltaTime;
-        }
-        if(Input.GetKey(KeyCode.D))
-        {
-            transform.position -= transform.right * -speed * Time.deltaTime;
-        }
+        xinput = Input.GetAxis("Horizontal");
+        yinput = Input.GetAxis("Vertical");
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class ShopManagerScript : MonoBehaviour
 {
@@ -17,12 +18,15 @@ public class ShopManagerScript : MonoBehaviour
     
     void Start()
     {
+        coins = GameInfo.cash;
+        year = GameInfo.year;
+
         CoinsTXT.text = "CURRENCY (SOL): S/ " + coins.ToString() + ".00";
 
         // id
-        shopItems[1,1] = 1;
-        shopItems[1,2] = 2;
-        shopItems[1,3] = 3;
+        shopItems[1,1] = 1; //seed
+        shopItems[1,2] = 2; //fert
+        shopItems[1,3] = 3; //water
 
         // Price
         switch (year) {
@@ -49,9 +53,9 @@ public class ShopManagerScript : MonoBehaviour
         }
 
         // Quantity
-        shopItems[3,1] = 0;
-        shopItems[3,2] = 0;
-        shopItems[3,3] = 0;
+        shopItems[3,1] = GameInfo.seed;
+        shopItems[3,2] = GameInfo.fert;
+        shopItems[3,3] = GameInfo.water;
     
 
     }
@@ -67,5 +71,15 @@ public class ShopManagerScript : MonoBehaviour
             //ButtonRef.GetComponent<ButtonInfo>().QuantityTXT.text = shopItems[3,ButtonRef.GetComponent<ButtonInfo>().ItemID].ToString();
 
         }
+    }
+
+    public void EndShop()
+    {
+        GameInfo.year++;
+        GameInfo.seed = shopItems[3, 1];
+        GameInfo.fert = shopItems[3, 2];
+        GameInfo.water = shopItems[3, 3];
+        GameInfo.cash = coins;
+        SceneManager.LoadScene("GameScene");
     }
 }

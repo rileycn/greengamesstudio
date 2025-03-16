@@ -60,7 +60,7 @@ public class PlantManager : MonoBehaviour
             } else if (dobj.objectType == DraggableObject.DraggableType.Water && phase == 1)
             {
                 legal = true;
-            } else if (dobj.objectType == DraggableObject.DraggableType.Fert && phase == 1 && !fertilized && !raining)
+            } else if (dobj.objectType == DraggableObject.DraggableType.Fert && phase == 1 && !fertilized/* && !raining*/)
             {
                 legal = true;
             }
@@ -140,6 +140,7 @@ public class PlantManager : MonoBehaviour
         stage2obj.SetActive(false);
         stage3obj.SetActive(false);
         health = maxhealth;
+        GameManager.main.cropYield++;
         fertilized = false;
         UpdateVisualFert();
     }

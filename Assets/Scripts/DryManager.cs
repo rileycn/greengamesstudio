@@ -6,8 +6,6 @@ public class DryManager : MonoBehaviour
 {
     private List<PlantManager> under = new();
 
-    public TMP_Text textColor;
-
     private float baseopactiy = 0.5f;
 
     private float startTime;
@@ -38,7 +36,6 @@ public class DryManager : MonoBehaviour
             float alpha = Time.time - startTime;
             SpriteRenderer sr = GetComponent<SpriteRenderer>();
             sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, alpha * baseopactiy);
-            textColor.color = new Color(textColor.color.r, textColor.color.g, textColor.color.b, alpha * baseopactiy);
         }
         else if (Time.time - startTime < 14f)
         {
@@ -50,7 +47,6 @@ public class DryManager : MonoBehaviour
             float alpha = 15f - (Time.time - startTime);
             SpriteRenderer sr = GetComponent<SpriteRenderer>();
             sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, alpha * baseopactiy);
-            textColor.color = new Color(textColor.color.r, textColor.color.g, textColor.color.b, alpha * baseopactiy);
         }
         else
         {
