@@ -9,6 +9,11 @@ public class rain_real : MonoBehaviour
     public int rain_needed = 5;
 
     public rain_spawner spawner;
+
+    // audio
+    public random_sound audio;
+    //
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -26,6 +31,9 @@ public class rain_real : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision) {
         if (collision.transform.tag == "Player") {
+            //droplet sound
+            audio.PlayRandom();
+            //
             spawner.rain_collected += 1;
         }
         counterLoc.text = spawner.rain_collected + "/" + rain_needed;
