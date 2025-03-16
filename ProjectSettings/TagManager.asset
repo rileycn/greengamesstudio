@@ -4,16 +4,18 @@
 TagManager:
   serializedVersion: 3
   tags:
+  - Ground
+  - Cactus
   - Event
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
-  - 
-  - 
+  - Wall
+  - Goal
   - 
   - 
   - 
@@ -44,3 +46,4 @@ TagManager:
     locked: 0
   m_RenderingLayers:
   - Default
+  - Minigame
