@@ -60,6 +60,13 @@ public class GameManager : MonoBehaviour
     public TMP_Text cashEarnedText;
     public GameObject endNextButton;
 
+    public GameObject farmIntroDialogue;
+    public GameObject endYear1Dialogue;
+    public GameObject startYear2Dialogue;
+    public GameObject endYear2Dialogue;
+    public GameObject startYear3Dialogue;
+    public GameObject endYear3Dialogue;
+
     public enum SeasonValue
     {
         Planting = 0,
@@ -105,6 +112,8 @@ public class GameManager : MonoBehaviour
     private int firstWindstormIndex = 0;
     private int firstRainstormIndex = 0;
 
+    public bool isStarted  = false;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -117,28 +126,42 @@ public class GameManager : MonoBehaviour
         seed = GameInfo.seed;
         water = GameInfo.water;
         fert = GameInfo.fert;
-        maxcrop = seed;
         year = GameInfo.year;
         crop = 0;
         cropYield = 0;
         yearText.text = "Year " + year;
         nextDisaster = Time.time + 10f + Random.value * 5f;
         UpdateMeterVisuals();
-        StartGame();
+        if (year == 1)
+        {
+            farmIntroDialogue.SetActive(true);
+        } else if (year == 2)
+        {
+            startYear2Dialogue.SetActive(true);
+        }
+        else if (year == 3)
+        {
+            startYear3Dialogue.SetActive(true);
+        }
+        //StartGame();
     }
 
     // Update is called once per frame
     void Update()
     {
-        UpdateDial();
-        CalculateMonth();
-        DisasterCheck();
+        if (isStarted) {
+            UpdateDial();
+            CalculateMonth();
+            DisasterCheck();
+        }
     }
 
-    private void StartGame()
+    public void StartGame()
     {
         startTime = Time.time;
+        maxcrop = seed;
         season = SeasonValue.Planting;
+        isStarted = true;
         SplashScreen();
     }
 
@@ -380,8 +403,8 @@ public class GameManager : MonoBehaviour
 
     public void UpdateMeterVisuals()
     {
-        cropValue.transform.localPosition = new Vector3(-0.5f * (1f - crop / maxcrop), 0f, 0f);
-        cropValue.transform.localScale = new Vector3(crop / maxcrop, 1f, 1f);
+        cropValue.transform.localPosition = new Vector3(-0.5f * (1f - crop / Mathf.Max(1f, maxcrop)), 0f, 0f);
+        cropValue.transform.localScale = new Vector3(crop / Mathf.Max(1f, maxcrop), 1f, 1f);
         seedValue.transform.localPosition = new Vector3(-0.5f * (1f - seed / maxValue), 0f, 0f);
         seedValue.transform.localScale = new Vector3(seed / maxValue, 1f, 1f);
         waterValue.transform.localPosition = new Vector3(-0.5f * (1f - water / maxValue), 0f, 0f);
@@ -481,7 +504,21 @@ public class GameManager : MonoBehaviour
         GameInfo.cash += (20 * cropYield);
         yield return Punch(cashEarnedText.transform);
         yield return new WaitForSeconds(1f);
-        yield return Punch(endNextButton.transform);
+        if (year == 1) {
+            endYear1Dialogue.SetActive(true);
+        } else if (year == 2)
+        {
+            endYear2Dialogue.SetActive(true);
+        }
+        else if (year == 3)
+        {
+            endYear3Dialogue.SetActive(true);
+        }
+    }
+
+    public void AfterYear1EndDialogue()
+    {
+        StartCoroutine(Punch(endNextButton.transform));
     }
     
     public IEnumerator Punch(Transform obj)
@@ -559,8 +596,8 @@ public class GameManager : MonoBehaviour
 public class GameInfo
 {
     public static int year = 1;
-    public static int seed = 25;
-    public static int water = 25;
-    public static int fert = 25;
+    public static int seed = 0;
+    public static int water = 0;
+    public static int fert = 0;
     public static float cash = 0f;
 }
