@@ -35,7 +35,7 @@ public class DraggableObject : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (select == null && !GameManager.main.inWarning)
+        if (select == null && !GameManager.main.inWarning && GameManager.main.isStarted)
         {
             select = this;
             ogPos = transform.position;
