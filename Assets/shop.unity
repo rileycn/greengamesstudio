@@ -119,6 +119,37 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &4363223
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4363224}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4363224
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4363223}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.5365408, y: -0.5387905, z: 165.22679}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &52881602
 GameObject:
   m_ObjectHideFlags: 0
@@ -1724,7 +1755,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -14, y: -146}
+  m_AnchoredPosition: {x: -8.995003, y: -136.78}
   m_SizeDelta: {x: 18, y: -40.435005}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1150015742
@@ -2729,7 +2760,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 9, y: -143}
+  m_AnchoredPosition: {x: 9, y: -136.78}
   m_SizeDelta: {x: 18, y: -40.435005}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1826087901
@@ -2766,7 +2797,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -10, y: -148}
+  m_AnchoredPosition: {x: -9, y: -136.79}
   m_SizeDelta: {x: 0.0000076294, y: -40.435005}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1826087903
@@ -2977,7 +3008,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d24a38713331e4533b4eb95f224190a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coins: 10
+  coins: 100
   Quantity: 0
   CoinsTXT: {fileID: 643925358}
   QuantityTXT: {fileID: 0}
@@ -3142,3 +3173,4 @@ SceneRoots:
   - {fileID: 658590547}
   - {fileID: 1952323449}
   - {fileID: 52881604}
+  - {fileID: 4363224}
