@@ -2,7 +2,7 @@
 
 Playable jam game about quinoa farming and climate shocks.
 
-[![Gameplay banner](docs/Game.gif)](docs/Game.gif)
+[![Gameplay banner](Docs/Game.gif)](Docs/Game.gif)
 
 Playable build: https://rileycn.itch.io/alpacaventure
 Research paper: https://doi.org/10.4324/9781003356837-14
@@ -53,23 +53,23 @@ You are a quinoa farmer growing over multiple years: plant, maintain, harvest, a
 
 **Hero**
 
-[![Gameplay banner](docs/Game.gif)](docs/Game.gif)
+[![Gameplay banner](Docs/Game.gif)](Docs/Game.gif)
 
 **Gameplay**
 
-[![Field — planting](docs/Gameplay.png)](docs/Gameplay.png)
+[![Field — planting](Docs/Gameplay.png)](Docs/Gameplay.png)
 
 _Caption: Planting interaction._
 
 **Minigames**
 
-[![Wind minigame](docs/Minigame.png)](docs/Minigame.png)
+[![Wind minigame](Docs/Minigame.png)](Docs/Minigame.png)
 
 _Caption: Example minigame encountered during weather events._
 
 **Menu**
 
-[![Main menu](docs/MainMenu.png)](docs/MainMenu.png)
+[![Main menu](Docs/MainMenu.png)](Docs/MainMenu.png)
 
 _Caption: Main menu interface._
 
