@@ -67,7 +67,7 @@ _Caption: Planting interaction._
 
 _Caption: Example minigame encountered during weather events._
 
-**Menu / Shop**
+**Menu**
 
 [![Main menu](docs/MainMenu.png)](docs/MainMenu.png)
 
@@ -75,9 +75,6 @@ _Caption: Main menu interface._
 
 ## Research context
 This project was created as part of a research-driven game jam showcasing quinoa farming and climate impacts (see chapter at https://doi.org/10.4324/9781003356837-14). The narrative and design were inspired by this research.
-
-## License
-This repository uses the MIT License (see `LICENSE`).
 
 ## For maintainers / recruiters
 - What to look at first: open [Assets/Scenes/GameScene.unity](Assets/Scenes/GameScene.unity) and then inspect [Assets/Scripts/GameManager.cs](Assets/Scripts/GameManager.cs) and [Assets/Scripts/PlantManager.cs](Assets/Scripts/PlantManager.cs) to understand the game loop and plant lifecycle.
